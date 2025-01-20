@@ -1,0 +1,108 @@
+//all the files is in tsx(typescript) just use chatGPT to convert into jsx(javascript)
+
+
+
+
+
+
+//simple carousel and slider with numbers for practice you can add images instead of numbers
+
+import { useEffect, useState } from "react";
+
+function SliderCarousel() {
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [allImages, setAllImages] = useState<number[]>([1, 2, 3, 4]);
+
+//for carousel timer changes automatically withing 2 secs
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSelectedImage((prev) => (prev < allImages.length - 1 ? prev + 1 : 0));
+    }, 2000); 
+    return () => clearInterval(intervalId); // Clear interval on unmount
+  }, [allImages.length]);
+
+  return (
+    <div>
+      <div
+        style={{
+          width: "810px",
+          height: "400px",
+          textAlign: "center",
+          lineHeight: "400px",
+          fontSize: "40px",
+        }}
+      >
+        {allImages[selectedImage]}
+      </div>
+      <br />
+      
+      //for next,prev button or slider
+      <button
+        onClick={() => {
+          setSelectedImage((prev) =>
+            prev > 0 ? prev - 1 : allImages.length - 1
+          );
+        }}
+      >
+        PREV
+      </button>
+
+      <button
+        onClick={() => {
+          setSelectedImage((prev) =>
+            prev < allImages.length - 1 ? prev + 1 : 0
+          );
+        }}
+      >
+        NEXT
+      </button>
+    </div>
+  );
+}
+
+export default SliderCarousel;
+
+
+
+
+
+
+
+
+//simple carousel and slider with images for practice
+
+// import { useEffect, useState } from "react";
+
+// function SliderCarousel() {
+//   const [selectedImage, setSelectedImage] = useState(0);
+//   const [allImages, setAllImages] = useState<number[]>([1, 2, 3, 4]);
+
+//   useEffect(() => {
+//     setInterval(() => {
+//       setSelectedImage((selectedImage) =>
+//         selectedImage < 3 ? selectedImage + 1 : 0
+//       );
+//     }, 4000);
+//   }, []);
+
+//   return (
+//     <div>
+//       <img width={810} height={400} src={allImages[selectedImage]} /> <br />
+//       <button
+//         onClick={() => {
+//           if (selectedImage > 0) setSelectedImage(selectedImage - 1);
+//         }}
+//       >
+//         PREV
+//       </button>
+//       <button
+//         onClick={() => {
+//           if (selectedImage < allImages.length - 1)
+//             setSelectedImage(selectedImage + 1);
+//         }}
+//       >
+//         NEXT
+//       </button>
+//     </div>
+//   );
+// }
