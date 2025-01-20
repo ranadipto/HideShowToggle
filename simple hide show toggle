@@ -1,0 +1,27 @@
+//simple hide&show and toggle button
+
+
+import { useState } from "react";
+
+export default function HideShow() {
+  const [status, setStatus] = useState<boolean>(false);
+
+  return (
+    <div className="App">
+      {status ? <h1>Hello CodeSandbox</h1> : null}
+
+      {/* //double button */}
+      {/* <button className="btn btn-info" onClick={() => setStatus(false)}>
+        Hide
+      </button>
+      <button className="btn btn-secondary" onClick={() => setStatus(true)}>
+        Show
+      </button> */}
+
+      {/* //single button */}
+      <button className="btn btn-primary" onClick={() => setStatus(!status)}>
+        Toggle
+      </button>
+    </div>
+  );
+}
