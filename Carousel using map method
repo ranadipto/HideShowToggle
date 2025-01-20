@@ -1,0 +1,89 @@
+//image slider and carousel using map method and i have used bootstrap classes , tsx (typescript)  you can conver into jsx(javascript) using chatGPT
+
+
+
+
+import React, { useState, useEffect } from "react";
+import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa"; // Import the icons
+
+const images = [
+  "https://ecommerce-1-0-main-frontend.vercel.app/img/mainbanner1-1680x900.jpg",
+  "https://ecommerce-1-0-main-frontend.vercel.app/img/mainbanner2-1680x900.jpg",
+  "https://ecommerce-1-0-main-frontend.vercel.app/img/mainbanner1-1680x900.jpg",
+  "https://ecommerce-1-0-main-frontend.vercel.app/img/mainbanner2-1680x900.jpg",
+  "https://ecommerce-1-0-main-frontend.vercel.app/img/mainbanner1-1680x900.jpg",
+];
+
+function Carousel() {
+  const [current, setCurrent] = useState(0);
+
+  // Next and Previous slide functions
+  function nextSlide() {
+    setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1)); // Automatically go to the next image
+  }
+
+  function prevSlide() {
+    setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1)); // Go back to the previous image
+  }
+
+  // UseEffect with setInterval for auto sliding every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide(); // Change to the next image every 2 seconds
+    }, 2000); // 2000 milliseconds = 2 seconds
+
+    // Clear the interval when the component unmounts or when the effect is re-run
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array, this effect runs once when the component mounts
+
+  return (
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-12 col-md-8">
+          <div className="position-relative">
+            {/* Left Arrow Button */}
+            <button
+              className="btn btn-dark position-absolute top-50 start-0 translate-middle-y p-3 rounded-circle shadow border-0"
+              onClick={prevSlide}
+              style={{
+                left: "-40px", // Adjust to position outside the image
+                backgroundColor: "rgba(0, 0, 0, 0.5)", // Subtle dark background
+                transition: "background-color 0.3s",
+              }}
+              onMouseEnter={(e) => (e.target.style.backgroundColor = "rgba(0, 0, 0, 0.7)")} // Hover effect
+              onMouseLeave={(e) => (e.target.style.backgroundColor = "rgba(0, 0, 0, 0.5)")}
+            >
+              <FaArrowCircleLeft size={40} color="white" />
+            </button>
+
+            {/* Image Display */}
+            <div className="slide">
+              <img
+                className="img-fluid w-100 rounded-3"
+                src={images[current]} // Always display the current image based on state
+                alt="carousel"
+              />
+            </div>
+
+            {/* Right Arrow Button */}
+            <button
+              className="btn btn-dark position-absolute top-50 end-0 translate-middle-y p-3 rounded-circle shadow border-0"
+              onClick={nextSlide}
+              style={{
+                right: "-40px", // Adjust to position outside the image
+                backgroundColor: "rgba(0, 0, 0, 0.5)", // Subtle dark background
+                transition: "background-color 0.3s",
+              }}
+              onMouseEnter={(e) => (e.target.style.backgroundColor = "rgba(0, 0, 0, 0.7)")} // Hover effect
+              onMouseLeave={(e) => (e.target.style.backgroundColor = "rgba(0, 0, 0, 0.5)")}
+            >
+              <FaArrowCircleRight size={40} color="white" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Carousel;
