@@ -5,4 +5,4 @@ card slider
 image carousel
 side navbar
 
-all of this using react tsx (typescript) you can convert by using chatGPT easily
+all of this using react tsx (typescript) you can convert into jsx (javascript) by using chatGPT easily
